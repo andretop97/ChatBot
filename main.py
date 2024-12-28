@@ -20,7 +20,6 @@ def load_pdfs(pdf_paths):
         loader = PyPDFLoader(path)
         for document in loader.load():
             documents.append(document)
-        # documents.extend(loader.load())
     return documents
 
 def get_documents_content(directory):
