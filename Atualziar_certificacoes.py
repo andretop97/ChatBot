@@ -95,7 +95,7 @@ def atualizar_df(csv_data, Bucket, pdfs, chain):
                 response['URI'] = pdf
                 new_df = pd.DataFrame([response])
                 df = pd.concat([df, new_df], ignore_index=True)
-                print(df)
+                print(f"Certificado {pdf} adicionado ao registro.")
     return df
 
 def salvar_registro_atualizado(df, Bucket, registroKey):
@@ -111,17 +111,10 @@ def atualizar_registro_de_certificados(Bucket, Prefix, registroKey, chain):
     pdfs = listar_pdfs_recursivamente(Bucket, Prefix)
     print(f"Encontrados {len(pdfs)} PDFs.")
     csv_data = get_bucket_object(Bucket, registroKey)
-    print(csv_data)
     if csv_data:
         csv_data = csv_data.decode('utf-8')
         r_atualizado = atualizar_df(csv_data, Bucket, pdfs, chain)
         salvar_registro_atualizado(r_atualizado, Bucket, registroKey)
-    # atualizar_registro(csv_data, Bucket, pdfs, chain)
-
-# def criar_csv():
-#     colunas = ['Certificado', 'Instituicao', 'Area', 'Nivel', 'Data_fim', 'URI', 'KeyWords']
-#     df = pd.DataFrame(columns=colunas)
-#     return df.to_csv("certifications_file.csv", index=False, encoding='utf-8')
 
 if __name__ == "__main__":
     load_dotenv()    
