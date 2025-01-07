@@ -1,11 +1,10 @@
 import io
 import os
-import json
 import boto3
 import PyPDF2
 import pandas as pd
 from langchain_core.prompts.prompt import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from dotenv import load_dotenv
